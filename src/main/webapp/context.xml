@@ -1,9 +1,0 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<Context path='/trappistenloop'>
- <Resource name='trappistenloop'
- type='javax.sql.DataSource'
- username='ceucki' password='7b62f39b'
- driverClassName='com.mysql.jdbc.Driver'
- url='jdbc:mysql://localhost:3306/trappistenloop?useSSL=false'
- closeMethod='close'/>
-</Context>

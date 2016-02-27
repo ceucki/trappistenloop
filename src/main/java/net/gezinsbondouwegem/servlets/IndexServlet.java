@@ -3,7 +3,16 @@ package net.gezinsbondouwegem.servlets;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -28,7 +37,6 @@ public class IndexServlet extends HttpServlet {
 	private final transient AdresService adresService = new AdresService();
 	private final transient CityService cityService = new CityService();
 
-
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -50,8 +58,7 @@ public class IndexServlet extends HttpServlet {
 			fouten.put("familienaam", "verplicht");
 		}
 		String idActiviteit = request.getParameter("activiteit");
-		if (idActiviteit == null)
-		{
+		if (idActiviteit == null) {
 			fouten.put("activiteit", "verplicht");
 		}
 		String postcode = request.getParameter("postcode");
@@ -59,16 +66,64 @@ public class IndexServlet extends HttpServlet {
 		String street = request.getParameter("straat");
 		String telefoonNr = request.getParameter("telefoonNr");
 		String email = request.getParameter("email");
-		
+
 		if (fouten.isEmpty()) {
-			Persoon persoon = new Persoon(voornaam, familienaam, email, telefoonNr);	
+			Persoon persoon = new Persoon(voornaam, familienaam, email, telefoonNr);
 			// TODO fetch adres, huisNr
 			// Adres adres = adresService.read(Long.parseLong(street));
-			Adres adres = new Adres(street,"1",postcode, gemeente);
+			Adres adres = new Adres(street, "1", postcode, gemeente);
 			adresService.create(adres);
-			persoon.setAdres(adres);			
+			persoon.setAdres(adres);
 			persoon.setActiviteit(activiteitService.read(Long.parseLong(idActiviteit)));
 			persoonService.create(persoon);
+
+			Properties props = new Properties();
+			props.setProperty("mail.host", "smtp.gmail.com");
+			props.setProperty("mail.smtp.port", "587");
+			props.setProperty("mail.smtp.auth", "true");
+			props.setProperty("mail.smtp.starttls.enable", "true");
+
+			Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+				protected PasswordAuthentication getPasswordAuthentication() {
+					return new PasswordAuthentication("kristof.ceuterick@gmail.com", "7b62f39b");
+				}
+			});
+
+			MimeMessage msg = new MimeMessage(session);
+			try {
+				msg.setText("testtext");
+			} catch (MessagingException e3) {
+				// TODO Auto-generated catch block
+				e3.printStackTrace();
+			}
+			try {
+				msg.setSubject("testsubject");
+			} catch (MessagingException e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
+			}
+			try {
+				msg.setFrom(new InternetAddress("kristof.ceuterick@gmail.com"));
+			} catch (AddressException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (MessagingException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			try {
+				msg.addRecipient(Message.RecipientType.TO, new InternetAddress("kristof.ceuterick@gmail.com"));
+			} catch (MessagingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				Transport.send(msg);
+			} catch (MessagingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
 			response.sendRedirect(
 					response.encodeRedirectURL(String.format(REDIRECT_URL, request.getContextPath(), persoon.getId())));
 		} else {
