@@ -35,7 +35,7 @@
 								name='voornaam' value='${param.voornaam}' autofocus required></label>
 							<label>Familienaam: <span>${fouten.familienaam}</span> <input
 								name='familienaam' value='${param.familienaam}' required></label>
-							<label>Straat: <span>${fouten.straat}</span> <input
+							<label>Straat + HuisNr: <span>${fouten.straat}</span> <input
 								name='straat' value='${param.straat}'></label> 
 							<!--  <label>Postcode:
 								<span>${fouten.postcode}</span><br> <select name="postcode" required>
