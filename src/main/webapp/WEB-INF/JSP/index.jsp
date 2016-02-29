@@ -36,14 +36,7 @@
 							<label>Familienaam: <span>${fouten.familienaam}</span> <input
 								name='familienaam' value='${param.familienaam}' required></label>
 							<label>Straat + HuisNr: <span>${fouten.straat}</span> <input
-								name='straat' value='${param.straat}'></label> 
-							<!--  <label>Postcode:
-								<span>${fouten.postcode}</span><br> <select name="postcode" required>
-									<c:forEach var='postcode' items='${postcodes}'>
-										<option value='${postcode.idcities}'>${postcode.structure}</option>
-									</c:forEach>
-							</select>
-							</label> <br> -->
+								name='straat' value='${param.straat}'></label> 							
 							<label>Postcode: <span>${fouten.postcode}</span> <input
 								name='postcode' value='${param.postcode}' required></label>
 							<label>Gemeente: <span>${fouten.gemeente}</span> <input
