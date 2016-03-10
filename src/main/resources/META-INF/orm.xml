@@ -12,4 +12,7 @@
 	<named-query name='Adres.findAll'>
 		<query> select d from Adres d </query>
 	</named-query>
+	<named-query name='Persoon.findAll'> 
+		<query>  select c from Persoon c order by c.idPersoon  </query>
+	</named-query>
 </entity-mappings> 

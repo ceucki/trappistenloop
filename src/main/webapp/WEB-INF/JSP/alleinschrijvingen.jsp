@@ -16,35 +16,39 @@
   		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
 </head>
-<body>	
-<div class="component">		
-<img src='<c:url value="/images/header.jpg"/>'>
-	<c:choose>	
-		<c:when test='${empty persoon}'>
-			<div class='fout'>${empty fout ? 'Inschrijving niet gevonden' : fout}</div>
-		</c:when>
-		<c:otherwise>		
-			<h1>Bedankt voor je inschrijving!</h1>
-			<table>
-				<thead>
+<body>
+	<div class="component">
+		<img src='<c:url value="/images/header.jpg"/>'>
+
+		<h1>Alle inschrijvingen test</h1>
+		<table>
+			<thead>
+				<tr>
+					<th>Nr</th>
+					<th>Naam</th>
+					<th>Voornaam</th>
+					<th>Adres</th>
+					<th>Gemeente</th>					
+					<th>Activiteit</th>
+					<th>Prijs</th>
+					<th>Datum</th>					
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="persoon" items="${allePersonen}">
 					<tr>
-						<th>Naam</th>
-						<th>Voornaam</th>
-						<th>Activiteit</th>
-						<th>Prijs</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>${persoon.naam}</td>						
-						<td>${persoon.voornaam}</td>						
-						<td>${persoon.activiteit.activiteit}</td>					
+						<td>${persoon.id}</td>
+						<td>${persoon.naam}</td>
+						<td>${persoon.voornaam}</td>
+						<td>${persoon.adres.straat}</td>
+						<td>${persoon.adres.gemeente}</td>											
+						<td>${persoon.activiteit.activiteit}</td>
 						<td>${persoon.activiteit.prijs}</td>
+						<td>${persoon.datum}</td>						
 					</tr>
-				</tbody>
-			</table>
-		</c:otherwise>
-	</c:choose>
+				</c:forEach>
+			</tbody>
+		</table>
 	</div>
 </body>
 </html>

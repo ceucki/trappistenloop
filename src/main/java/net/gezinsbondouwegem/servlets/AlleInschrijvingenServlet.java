@@ -11,26 +11,26 @@ import javax.servlet.http.HttpServletResponse;
 import net.gezinsbondouwegem.services.PersoonService;
 
 /**
- * Servlet implementation class OverzichtServlet
+ * Servlet implementation class AlleInschrijvingenServlet
  */
-@WebServlet("/overzicht.htm")
-public class OverzichtServlet extends HttpServlet {
+@WebServlet("/alleinschrijvingen.htm")
+public class AlleInschrijvingenServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final String VIEW = "/WEB-INF/JSP/overzicht.jsp";
-	private final PersoonService persoonDAO = new PersoonService();
-   
+	private static final String VIEW = "/WEB-INF/JSP/alleinschrijvingen.jsp";   
+	private static final PersoonService persoonService = new PersoonService();
 	
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public AlleInschrijvingenServlet() {
+        super();     
+    }
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try {
-			request.setAttribute("persoon",
-					persoonDAO.read(Long.parseLong(request.getParameter("id"))));
-		} catch (NumberFormatException ex) { // request param bevat geen getal
-			request.setAttribute("fout", "Nummer niet correct");
-		}
-
+		request.setAttribute("allePersonen", persoonService.findAllePersonen());
 		request.getRequestDispatcher(VIEW).forward(request, response);
 	}
 

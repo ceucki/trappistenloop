@@ -1,6 +1,7 @@
 package net.gezinsbondouwegem.entities;
 
 import java.io.Serializable;
+import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,7 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 @Entity
 @Table(name = "persoon")
@@ -31,8 +31,11 @@ public class Persoon implements Serializable {
 	private String Voornaam;
 	@Column(name = "TelefoonNr")
 	private String TelefoonNr;
-	@Transient // TODO make column email
+	@Column(name = "email")
 	private String Email;
+	
+	@Column(name="datum")
+	private Date datum;
 
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name="idAdres")
@@ -42,11 +45,23 @@ public class Persoon implements Serializable {
 	@JoinColumn(name="idActiviteit")
 	private Activiteit activiteit;
 
-	// TODO Date
+
 
 	public Adres getAdres() {
 		return adres;
 	}
+	
+	public Date getDatum() {
+		return datum;
+	}
+
+
+
+	public void setDatum(Date datum) {
+		this.datum = datum;
+	}
+
+
 
 	public void setAdres(Adres adres) {
 		this.adres = adres;
@@ -59,16 +74,16 @@ public class Persoon implements Serializable {
 	public void setActiviteit(Activiteit activiteit) {
 		this.activiteit = activiteit;
 	}
-
-	public Persoon() {
-	};
+	
+	public Persoon(){}
 
 	public Persoon(String voornaam, String familienaam, String email,
-			String telefoonNr) {
+			String telefoonNr, Date date) {
 		setEmail(email);
 		setNaam(familienaam);
 		setTelefoonNr(telefoonNr);
 		setVoornaam(voornaam);
+		setDatum(date);
 	}
 
 	public static boolean isVoornaamValid(String voornaam) {
