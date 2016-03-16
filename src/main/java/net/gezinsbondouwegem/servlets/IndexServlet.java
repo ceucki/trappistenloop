@@ -39,6 +39,8 @@ public class IndexServlet extends HttpServlet {
 		request.setAttribute("postcodes", cityService.findAll());
 		request.getRequestDispatcher(VIEW).forward(request, response);
 	}
+	
+	// test code
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

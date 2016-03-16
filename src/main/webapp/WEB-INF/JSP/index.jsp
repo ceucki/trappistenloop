@@ -7,15 +7,11 @@
 <!--   <link rel='stylesheet' href='styles/default2.css'> -->
 <title>Gezinsbond Ouwegem</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description"
-	content="Login and Registration Form with HTML5 and CSS3" />
-<meta name="keywords"
-	content="html5, css3, form, switch, animation, :target, pseudo-class" />
-<meta name="author" content="Codrops" />
-<link rel="shortcut icon" href="../favicon.ico">
-<link rel="stylesheet" type="text/css" href="styles/demo.css" />
-<link rel="stylesheet" type="text/css" href="styles/style3.css" />
-<link rel="stylesheet" type="text/css" href="styles/animate-custom.css" />
+
+<!-- <link rel="shortcut icon" href="../favicon.ico"> -->
+<link rel="stylesheet" type="text/css" href=<c:url value="styles/demo.css"/> />
+<link rel="stylesheet" type="text/css" href=<c:url value="styles/style3.css"/> />
+<link rel="stylesheet" type="text/css" href=<c:url value="styles/animate-custom.css"/> />
 
 </head>
 <body>

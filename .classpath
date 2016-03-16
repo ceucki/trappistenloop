@@ -29,7 +29,22 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="C:/apache-tomcat-8.0.21/lib/servlet-api.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Kristof/Documents/eclipselink/jlib/eclipselink.jar"/>
-	<classpathentry kind="lib" path="C:/Program Files/Java/jre7/lib/plugin.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Kristof/Documents/eclipselink/jlib/eclipselink.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Program Files/Java/jre7/lib/plugin.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/mysql-connector-java-5.1.38-bin.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/EclipseLink 2.5.2 (1)">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
+			<attribute name="owner.project.facets" value="jpt.jpa"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

@@ -1,4 +1,4 @@
-package net.gezinsbondouwegem.filters;
+package net.gezindsbondouwegem.filters;
 
 import java.io.IOException;
 
