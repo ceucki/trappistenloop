@@ -9,16 +9,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- <link rel="shortcut icon" href="../favicon.ico"> -->
-<link rel="stylesheet" type="text/css" href=<c:url value="styles/demo.css"/> />
-<link rel="stylesheet" type="text/css" href=<c:url value="styles/style3.css"/> />
-<link rel="stylesheet" type="text/css" href=<c:url value="styles/animate-custom.css"/> />
+<link rel="stylesheet" type="text/css"
+	href=<c:url value="styles/demo.css"/> />
+<link rel="stylesheet" type="text/css"
+	href=<c:url value="styles/style3.css"/> />
+<link rel="stylesheet" type="text/css"
+	href=<c:url value="styles/animate-custom.css"/> />
 
 </head>
 <body>
 	<div class="container">
 
 		<header>
-		<img src='<c:url value="/images/header.jpg"/>'>
+			<nav class="codrops-demos">
+				<a href="/Trappistenloop/login.htm">Inloggen</a> <a
+					href="/Trappistenloop/index.htm">Inschrijven</a>
+			</nav>
+			<img src='<c:url value="/images/header.jpg"/>'>
 			<h1>Inschrijven trappistenloop Gezinsbond Ouwegem</h1>
 		</header>
 		<section>
@@ -44,8 +51,7 @@
 								name='email' value='${param.email}'>
 							</label>
 							<p>
-								<label>Activiteit:</label> <br>
-								<select name="activiteit">
+								<label>Activiteit:</label> <br> <select name="activiteit">
 									<c:forEach var='optie' items='${activiteiten}'>
 										<option value='${optie.id}'>${optie.activiteit}:
 											€${optie.prijs}</option>
@@ -66,15 +72,7 @@
 			document.getElementById('toevoegknop').disabled = true;
 		};
 	</script>
-	
+
 </body>
-<footer class="animate form" id="wrapper">
-	<form method='post' id="aanmelden" autocomplete="on">
-		<label>login:<span>${fouten.login}</span> <input
-			name='login' value='${param.login}' autofocus required></label>
-		<label>Password: <span>${fouten.password}</span> <input
-			name='password' value='${param.password}' required type="password"></label>
-			<input type='submit' value='Inloggen' id='inloggen'>
-	</form>
-</footer>
+<footer> </footer>
 </html>

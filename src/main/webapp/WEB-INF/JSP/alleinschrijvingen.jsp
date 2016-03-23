@@ -17,10 +17,17 @@
 		<![endif]-->
 </head>
 <body>
+
 	<div class="component">
+	<header>
+			<nav class="codrops-demos">
+				<a href="/Trappistenloop/login.htm">Inloggen</a> <a
+					href="/Trappistenloop/index.htm">Inschrijven</a>
+			</nav>			
+		</header>
 		<img src='<c:url value="/images/header.jpg"/>'>
 
-		<h1>Alle inschrijvingen test</h1>
+		<h1>Alle inschrijvingen</h1>
 		<table>
 			<thead>
 				<tr>

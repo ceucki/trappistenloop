@@ -16,35 +16,58 @@
   		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
 </head>
-<body>	
-<div class="component">		
-<img src='<c:url value="/images/header.jpg"/>'>
-	<c:choose>	
-		<c:when test='${empty persoon}'>
-			<div class='fout'>${empty fout ? 'Inschrijving niet gevonden' : fout}</div>
-		</c:when>
-		<c:otherwise>		
-			<h1>Bedankt voor je inschrijving!</h1>
-			<table>
-				<thead>
-					<tr>
-						<th>Naam</th>
-						<th>Voornaam</th>
-						<th>Activiteit</th>
-						<th>Prijs</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>${persoon.naam}</td>						
-						<td>${persoon.voornaam}</td>						
-						<td>${persoon.activiteit.activiteit}</td>					
-						<td>${persoon.activiteit.prijs}</td>
-					</tr>
-				</tbody>
-			</table>
-		</c:otherwise>
-	</c:choose>
+<body>
+	<div class="component">
+		<img src='<c:url value="/images/header.jpg"/>'>
+		<c:choose>
+			<c:when test='${empty personenInMandje}'>
+				<div class='fout'>${empty fout ? 'Geen inschrijvingen gevonden' : fout}</div>
+			</c:when>
+			<c:otherwise>
+				<h1>Overzicht</h1>
+				<form method="post">
+					<table>
+						<thead>
+							<tr>
+								<th>Naam</th>
+								<th>Voornaam</th>
+								<th>Activiteit</th>
+								<th>Prijs</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach var='persoon' items='${personenInMandje}'>
+								<tr>
+									<td><c:out value='${persoon.naam}' /></td>
+									<td><c:out value='${persoon.voornaam}' /></td>
+									<td><c:out value='${persoon.activiteit.activiteit}' /></td>
+									<td><c:out value="€ ${persoon.activiteit.prijs}"></c:out></td>
+									<td><input type="hidden" value="${persoon.id}" name ="id" id="id"><input type='submit' value='Verwijderen' 
+										id='verwijderen'>
+									</td>
+								</tr>
+							</c:forEach>
+						</tbody>
+						<tfoot>
+							<tr>
+								<th>Totale Prijs</th>
+								<th></th>
+								<th></th>
+								<th><c:out value="€ ${totalePrijs}"></c:out></th>
+								<th></th>
+							</tr>
+						</tfoot>
+					</table>
+				</form>
+			</c:otherwise>
+		</c:choose>
+		<div id="container_buttons">
+			<a href="/Trappistenloop/index.htm"><button type="button"
+					class="a_demo_one">Nog een persoon toevoegen</button></a> 
+					<form method=post><input type="submit"
+					class="a_demo_one" name ="bevestigen" value="Inschrijving bevestigen"/></form>
+		</div>
 	</div>
 </body>
 </html>

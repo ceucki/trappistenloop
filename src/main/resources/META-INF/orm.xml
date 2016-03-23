@@ -12,7 +12,11 @@
 	<named-query name='Adres.findAll'>
 		<query> select d from Adres d </query>
 	</named-query>
-	<named-query name='Persoon.findAll'> 
+	<named-query name='Persoon.findAll'>
 		<query>  select c from Persoon c order by c.idPersoon  </query>
 	</named-query>
+	<named-query name="Persoon.findPrijsByActiviteit">
+		<query>select a.prijs from Persoon p, Activiteit a where p.idPersoon = :id </query>
+	</named-query>
+	
 </entity-mappings> 

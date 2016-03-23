@@ -18,6 +18,17 @@ public class PersoonService extends AbstractService {
 		commit();
 	}
 	
+	public void remove(Persoon persoon){
+		beginTransaction();
+		persoonDAO.remove(persoon);
+		commit();
+	}
+	
+	public Integer findPrijsActiviteitPersoon(long id)
+	{
+		return persoonDAO.findPrijsActiviteitPersoon(id);
+	}
+	
 	public List<Persoon> findAllePersonen() {
 		 return persoonDAO.findActiviteiten();
 		}

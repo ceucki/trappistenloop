@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--  OPENSHIFT DATABASE CONNECTION -->
+<!--  
+<Context path='/trappistenloopgezinsbondouwegem'>
+	<Resource name="jdbc/trappistenloopgezinsbondouwegem" type="javax.sql.DataSource"
+		auth="Container" password="qB1tvHQc912q" username="admin5vQeAht"
+		driverClassName="com.mysql.jdbc.Driver"
+		url="jdbc:mysql://127.3.123.130:3306/trappistenloopgezinsbondouwegem"
+		closeMethod='close'>
+		
+	</Resource>
+</Context> 
+-->
+
+<!-- local database connection -->
+
+
+<Context path='/trappistenloopgezinsbondouwegem'>
+	<Resource name="jdbc/trappistenloopgezinsbondouwegem" type="javax.sql.DataSource"
+		auth="Container" password="7b62f39b" username="ceucki"
+		driverClassName="com.mysql.jdbc.Driver"
+		url="jdbc:mysql://localhost:3306/trappistenloop"
+		closeMethod='close'>
+		
+	</Resource>
+</Context> 
+
+

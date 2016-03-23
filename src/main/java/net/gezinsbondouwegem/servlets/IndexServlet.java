@@ -4,14 +4,17 @@ import java.io.IOException;
 import java.sql.Date;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import net.gezinsbondouwegem.entities.Adres;
 import net.gezinsbondouwegem.entities.Persoon;
@@ -25,12 +28,13 @@ public class IndexServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	private static final String VIEW = "/WEB-INF/JSP/index.jsp";
-	private static final String REDIRECT_URL = "%s/overzicht.htm?id=%d";
-	private static final String REDIRECT_URL_LOGIN = "%s/alleinschrijvingen.htm?";
+	private static final String REDIRECT_URL = "%s/overzicht.htm";
 	private final transient PersoonService persoonService = new PersoonService();
 	private final transient ActiviteitService activiteitService = new ActiviteitService();
 	private final transient AdresService adresService = new AdresService();
 	private final transient CityService cityService = new CityService();
+	private static final String MANDJE = "mandje";
+
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -45,17 +49,7 @@ public class IndexServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		String login = request.getParameter("login");
-		String password = request.getParameter("password");
-
-		if (checkLogin(login, password)) {
-			checkLogin(request, response);
-
-		} else {
-
-			persoontoevoegen(request, response);
-		}
+			persoontoevoegen(request, response);		
 	}
 
 	private void persoontoevoegen(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -114,35 +108,23 @@ public class IndexServlet extends HttpServlet {
 			 * (MessagingException e) { // TODO Auto-generated catch block
 			 * e.printStackTrace(); } try { Transport.send(msg); } catch
 			 * (MessagingException e) { // TODO Auto-generated catch block
-			 * e.printStackTrace(); }
+			 * e.printStackTrace(); }	
 			 */
-
-			response.sendRedirect(
-					response.encodeRedirectURL(String.format(REDIRECT_URL, request.getContextPath(), persoon.getId())));
+			
+			HttpSession session = request.getSession();
+			@SuppressWarnings("unchecked")
+			Set<Long> mandje = (Set<Long>) session.getAttribute(MANDJE);
+			if (mandje == null) {
+				mandje = new LinkedHashSet<>();
+			}
+			mandje.add(persoon.getId());
+			session.setAttribute(MANDJE, mandje);
+			
+			response.sendRedirect(String.format(REDIRECT_URL, request.getContextPath()));
+		
 		} else {
 			request.setAttribute("fouten", fouten);
 			request.getRequestDispatcher(VIEW).forward(request, response);
 		}
-	}
-
-	private boolean checkLogin(String login, String password) {
-		if (login == null)
-			return false;
-
-		if (password == null)
-			return false;
-
-		if (!login.isEmpty() && !password.isEmpty()) {
-			if (login.equals("test") && password.equals("test")) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	private void checkLogin(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
-		response.sendRedirect(response.encodeRedirectURL(String.format(REDIRECT_URL_LOGIN, request.getContextPath())));
-	}
-
+	}	
 }
